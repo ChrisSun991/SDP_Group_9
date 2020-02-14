@@ -53,32 +53,39 @@ static double calculateAngle(double startX, double startY, double destX, double 
     return angle/M_PI * 180;
 }
 
-/*static void move(double startX, double startY, double destX, double destY) {
-
+static void move(double startX, double startY, double destX, double destY)
+{
     // Calculate the distance between the positions
     double distance = calculateDistance(startX, startY, destX, destY);
+    // Calculate the angle between them
+    double angle = calculateAngle(startX, startY, destX, destY);
+    // array that contains X coordinates of pots
+    double arrayOfPots_X[];
+    // array that contains Y coordinates of pots
+    double arrayOfPots_Y[];
 
-    //Calculate the angle between them
-    double angle = getAngle(startX, startY, destX, destY);
+    int i = 0;
 
-    // Initialise movement to false
-    bool move = false;
-
-    // set movement to true if robot still needs to move
-    if (distance < MAX_DISTANCE_ERROR) {
-        cout << "At location" << endl;
-    } else {
-        move = true;
-    }
-
-    // Move if movement is true
-    if (move) {
-        turn(angle);
-        moveForward();
+    while (i >= 0)
+    {
+        if (distance < MAX_DISTANCE_ERROR)
+        {
+            cout << "At location" << endl;
+            i++;
+            if (i == sizeof(arrayOfPots) - 1)
+                i = -1;
+        }
+        else
+        {
+            turn(angle);                                                  // turn at given angle
+            moveForward();                                                // move forward
+            move(currentX, currentY, arrayOfPots_X[i], arrayOfPots_Y[i]); // there needs to be a function to obtain current X and current Y
+        }
     }
 }
 
-static void movement(double startX, double startY, double destX, double destY, double reqAngle) {
+
+/*static void movement(double startX, double startY, double destX, double destY, double reqAngle) {
     
     // Calculate the distance between the positions
     double distance = calculateDistance(startX, startY, destX, destY);
