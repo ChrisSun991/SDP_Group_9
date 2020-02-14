@@ -54,9 +54,8 @@ static double calculateAngle(double startX, double startY, double destX, double 
 }
 
 static void move(double startX, double startY, double destX, double destY, double index)
-{ // we will pass 0 as the initial index
-    if (index < sizeof(arrayOfPots_X)) {
-        
+{ 
+    if (index < sizeof(arrayOfPots_X)) {  
     // Calculate the distance between the positions
     double distance = calculateDistance(startX, startY, destX, destY);
     // Calculate the angle between them
@@ -66,10 +65,9 @@ static void move(double startX, double startY, double destX, double destY, doubl
     // array that contains Y coordinates of pots
     double arrayOfPots_Y[];
     
-    
         if (distance < MAX_DISTANCE_ERROR) {
-        cout << "At location" << endl;
-        index++;
+            cout << "At location" << endl;
+            index++;
         } else {
             turn(angle); // turn at given angle
             moveForward(); // move forward
@@ -98,6 +96,10 @@ static void move(double startX, double startY, double destX, double destY, doubl
 }*/
 
 int main() {
+    // move(double startX, double startY, double destX, double destY, double index) will be called
+    // initial (x,y) of bot will be passed to startX, startY; 
+    // (x,y) of first pot to be sampled will be passed to destX, destY;
+    // we will pass 0 as the initial index
     cout << "angle is " << calculateAngle(5, 0, 0, 5) << endl;
     cout << "angle is " << calculateAngle(5, 5, 5, 5) << endl;
     cout << "angle is " << calculateAngle(0, 0, 0, 0) << endl;
