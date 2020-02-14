@@ -53,8 +53,8 @@ static double calculateAngle(double startX, double startY, double destX, double 
     return angle/M_PI * 180;
 }
 
-static void move(double startX, double startY, double destX, double destY)
-{
+static void move(double startX, double startY, double destX, double destY, double index)
+{ // we will pass 0 as the initial index
     // Calculate the distance between the positions
     double distance = calculateDistance(startX, startY, destX, destY);
     // Calculate the angle between them
@@ -63,24 +63,16 @@ static void move(double startX, double startY, double destX, double destY)
     double arrayOfPots_X[];
     // array that contains Y coordinates of pots
     double arrayOfPots_Y[];
-
-    int i = 0;
-
-    while (i >= 0)
-    {
-        if (distance < MAX_DISTANCE_ERROR)
-        {
-            cout << "At location" << endl;
-            i++;
-            if (i == sizeof(arrayOfPots) - 1)
-                i = -1;
+    
+    if (index < sizeof(arrayOfPots_X)) {
+        if (distance < MAX_DISTANCE_ERROR) {
+        cout << "At location" << endl;
+        index++;
+        } else {
+            turn(angle); // turn at given angle
+            moveForward(); // move forward
         }
-        else
-        {
-            turn(angle);                                                  // turn at given angle
-            moveForward();                                                // move forward
-            move(currentX, currentY, arrayOfPots_X[i], arrayOfPots_Y[i]); // there needs to be a function to obtain current X and current Y
-        }
+        move(currentX, currentY, arrayOfPots_X[index], arrayOfPots_Y[index], index); // there needs to be a function to obtain current X and current Y
     }
 }
 
